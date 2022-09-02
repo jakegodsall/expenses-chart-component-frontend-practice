@@ -1,6 +1,56 @@
 .visualisation {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / .5;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.bar {
+    background-color: var(--soft-red);
+    height: 50%;
+    width: 35px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .2s ease-in;
+}
+
+.bar:hover {
+    background-color: var(--very-pale-orange);
+}
+
+.active {
+    background-color: var(--cyan);
+}
+
+.active:hover {
+    background-color: var(--very-pale-cyan);
+}
+
+.text {
+    margin-top: 5px;
+    font-size: .7rem;
+    color: var(--medium-brown);
+}
+
+.daily-amount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark-brown);
+    width: 60px;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+    font-size: .8rem;
 }
