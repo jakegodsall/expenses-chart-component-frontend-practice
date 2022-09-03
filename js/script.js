@@ -7,7 +7,7 @@ const expenditure = {
     thu: 31.07,
     fri: 20.00,
     sat: 40.04,
-    sun: 32.97
+    sun: 44.97
 }
 
 
@@ -23,7 +23,7 @@ const hoverAndClickEffects = (bar) => {
     });
 };
 
-const showWeeklyExpenditure = () => {
+const renderWeeklyExpenditure = () => {
     const balance = document.querySelector('.balance-amount');
     
     // total amount in weekly expenditure
@@ -32,6 +32,8 @@ const showWeeklyExpenditure = () => {
     }, 0);
 
     balance.innerText = `$${totalAmount}`;
+
+    return totalAmount
 };
 
 const renderDailyExpenditure = (bar) => {
@@ -64,14 +66,24 @@ const onHover = (bar) => {
 };
 
 
-showWeeklyExpenditure();
+const totalAmount = renderWeeklyExpenditure();
+
+const setBarHeights = (bar) => {
+    const highestExpenditure = Math.max(...Object.values(expenditure));
+    
+
+    const day = bar.parentNode.classList[0];
+    const barHeight = Math.round((expenditure[day] / highestExpenditure) * 80) + '%';
+    const thisBar = document.querySelector(`.${day}__bar`);
+    console.log(thisBar);
+    thisBar.style.height = barHeight;
+}
 
 bars.forEach(bar => {
+    setBarHeights(bar);
     onHover(bar);
-
-    console.log(bar);
-
-
     hoverAndClickEffects(bar);
+    console.log(bar);
+    setBarHeights
     
 });

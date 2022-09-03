@@ -3,7 +3,7 @@
     aspect-ratio: 1 / .5;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin: 25px 0;
 }
 
 .day {
@@ -15,7 +15,6 @@
 
 .bar {
     background-color: var(--soft-red);
-    height: 50%;
     width: 35px;
     border-radius: 4px;
     cursor: pointer;
@@ -41,6 +40,8 @@
 }
 
 .daily-amount {
+    position: relative;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
