@@ -12,6 +12,12 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-end;
+
+	@media screen and (min-width: 450px) {
+		min-width: 35px;
+		width: 15%;
+		max-width: 60px;
+	}
 }
 
 .bar {
@@ -20,6 +26,10 @@
 	border-radius: 4px;
 	cursor: pointer;
 	transition: all 0.2s ease-in;
+
+	@media screen and (min-width: 450px) {
+		width: 80%;
+	}
 }
 
 .bar:hover {
