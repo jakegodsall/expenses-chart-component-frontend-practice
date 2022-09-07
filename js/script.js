@@ -6,7 +6,7 @@ const expenditure = {
 	tue: 32.32,
 	wed: 52.36,
 	thu: 31.07,
-	fri: 20.0,
+	fri: 90.04,
 	sat: 40.04,
 	sun: 44.97,
 };
@@ -18,8 +18,9 @@ const renderWeeklyExpenditure = () => {
 	const totalAmount = Object.values(expenditure).reduce((total, el) => {
 		return total + el;
 	}, 0);
-	console.log(totalAmount);
-	balance.innerText = `$${totalAmount}`;
+
+	const formattedAmount = totalAmount.toLocaleString('en-GB');
+	balance.innerText = `£${formattedAmount}`;
 	return totalAmount;
 };
 
@@ -41,11 +42,19 @@ const onClick = bar => {
 		bars.forEach(bar => {
 			if (bar.classList.contains('active')) {
 				bar.classList.remove('active');
-				removeDailyExpenditure(bar);
 			}
 		});
 		bar.classList.add('active');
+	});
+};
+
+const onHover = bar => {
+	bar.addEventListener('mouseover', e => {
+		e.target.value;
 		renderDailyExpenditure(bar);
+	});
+	bar.addEventListener('mouseout', () => {
+		removeDailyExpenditure(bar);
 	});
 };
 
@@ -58,7 +67,7 @@ const renderDailyExpenditure = bar => {
 	const day = bar.parentNode.classList[0];
 	const value = expenditure[day];
 
-	div.innerText = `$${value}`;
+	div.innerText = `£${value}`;
 
 	// insert the daily expenditure element into the correct location
 	bar.parentNode.insertBefore(div, bar);
@@ -79,18 +88,11 @@ const removeDailyExpenditure = bar => {
 	parent.removeChild(dailyAmount);
 };
 
-const classHandlers = bar => {
-	if (bar.classList.contains('active') || bar.classList.contains('hover')) {
-		renderDailyExpenditure();
-	}
-};
-
 renderWeeklyExpenditure();
 
 // loop through all bars and apply event listeners
 bars.forEach(bar => {
 	setBarHeights(bar);
 	onClick(bar);
-	console.log(bar.classList);
-	classHandlers(bar);
+	onHover(bar);
 });
