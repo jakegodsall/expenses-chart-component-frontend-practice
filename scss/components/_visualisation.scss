@@ -1,67 +1,77 @@
 .visualisation {
-	width: 100%;
-	aspect-ratio: 1 / 0.7;
-	display: flex;
-	justify-content: space-between;
-	margin: 25px 0;
-	position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 0.7;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4rem;
+    position: relative;
 }
 
-.day {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-end;
+// .day {
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// 	justify-content: flex-end;
 
-	@media screen and (min-width: 450px) {
-		min-width: 35px;
-		width: 15%;
-		max-width: 60px;
-	}
-}
+// 	@media screen and (min-width: 450px) {
+// 		min-width: 35px;
+// 		width: 15%;
+// 		max-width: 60px;
+// 	}
+// }
+
+// .bar {
+// 	background-color: var(--soft-red);
+// 	width: 35px;
+// 	border-radius: 4px;
+// 	cursor: pointer;
+// 	transition: all 0.2s ease-in;
+
+// 	@media screen and (min-width: 450px) {
+// 		width: 80%;
+// 	}
+// }
+
+// .bar:hover {
+// 	background-color: var(--very-pale-orange);
+// }
+
+// .active {
+// 	background-color: var(--cyan);
+// }
+
+// .active:hover {
+// 	background-color: var(--very-pale-cyan);
+// }
+
+// .text {
+// 	margin-top: 5px;
+// 	font-size: 0.7rem;
+// 	color: var(--medium-brown);
+// }
+
+// .daily-amount {
+// 	position: absolute;
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// 	justify-content: center;
+// 	background-color: var(--dark-brown);
+// 	width: 60px;
+// 	height: 30px;
+// 	margin-bottom: 10px;
+// 	border-radius: 5px;
+// 	color: #fff;
+// 	font-weight: 600;
+// 	font-size: 0.8rem;
+// }
 
 .bar {
-	background-color: var(--soft-red);
-	width: 35px;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: all 0.2s ease-in;
-
-	@media screen and (min-width: 450px) {
-		width: 80%;
-	}
+    margin: 0.2rem;
+    border-radius: 10px;
+    fill: var(--soft-red);
 }
 
 .bar:hover {
-	background-color: var(--very-pale-orange);
-}
-
-.active {
-	background-color: var(--cyan);
-}
-
-.active:hover {
-	background-color: var(--very-pale-cyan);
-}
-
-.text {
-	margin-top: 5px;
-	font-size: 0.7rem;
-	color: var(--medium-brown);
-}
-
-.daily-amount {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: var(--dark-brown);
-	width: 60px;
-	height: 30px;
-	margin-bottom: 10px;
-	border-radius: 5px;
-	color: #fff;
-	font-weight: 600;
-	font-size: 0.8rem;
+    fill: var(--very-pale-orange);
 }
