@@ -14,6 +14,10 @@ const values = Object.values(expenditure);
 const svgHeight = 280;
 const svgWidth = 440;
 
+const yScale = (val) => {
+    return (val / Math.max(...values)) * svgHeight;
+};
+
 const svg = d3
     .select('.visualisation')
     .append('svg')
@@ -27,13 +31,13 @@ svg.selectAll('rect')
     .attr('class', 'bar')
     .attr('width', 50)
     .attr('height', (d) => {
-        return +((d / Math.max(...values)) * svgHeight);
+        return yScale(d);
     })
     .attr('x', (d, i) => {
         return i * 60;
     })
     .attr('y', (d, i) => {
-        return svgHeight - (d / Math.max(...values)) * svgHeight - 30;
+        return svgHeight - yScale(d) - 30;
     });
 
 svg.selectAll('text')
