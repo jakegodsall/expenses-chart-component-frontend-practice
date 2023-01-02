@@ -49,19 +49,27 @@ svg.selectAll('rect')
     .attr('class', 'bar')
     .attr('width', 50)
     .attr('height', (d) => {
-        return yScale(d);
+        return 0;
     })
     .attr('x', (d, i) => {
         return i * 60;
     })
     .attr('y', (d, i) => {
-        return svgHeight - yScale(d) - 30;
+        return svgHeight - 30;
     })
     .attr('rx', '5px')
     .on('mouseover', (e) => {
         e.attr('class', 'active');
     })
-    .on('mouseout', (e) => {});
+    .on('mouseout', (e) => {})
+    .transition()
+    .duration(800)
+    .attr('y', (d) => {
+        return svgHeight - yScale(d) - 30;
+    })
+    .attr('height', (d) => {
+        return yScale(d);
+    });
 
 svg.selectAll('text.days')
     .data(keys)
