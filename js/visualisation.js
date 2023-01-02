@@ -12,7 +12,7 @@ const keys = Object.keys(expenditure);
 const values = Object.values(expenditure);
 
 const svgHeight = 280;
-const svgWidth = 440;
+const svgWidth = 410;
 
 const yScale = (val) => {
     return (val / Math.max(...values)) * svgHeight;
@@ -38,7 +38,8 @@ svg.selectAll('rect')
     })
     .attr('y', (d, i) => {
         return svgHeight - yScale(d) - 30;
-    });
+    })
+    .attr('rx', '5px');
 
 svg.selectAll('text')
     .data(values)
