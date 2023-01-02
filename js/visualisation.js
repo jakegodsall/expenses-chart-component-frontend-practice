@@ -11,11 +11,13 @@ const expenditure = {
 const keys = Object.keys(expenditure);
 const values = Object.values(expenditure);
 
+const maxValue = Math.max(...values);
+
 const svgHeight = 280;
 const svgWidth = 410;
 
 const yScale = (val) => {
-    return (val / Math.max(...values)) * svgHeight;
+    return (val / maxValue) * (svgHeight - 60);
 };
 
 const svg = d3
@@ -39,7 +41,10 @@ svg.selectAll('rect')
     .attr('y', (d, i) => {
         return svgHeight - yScale(d) - 30;
     })
-    .attr('rx', '5px');
+    .attr('rx', '5px')
+    .on('click', () => {
+        d3.select(this).attr('class', 'active');
+    });
 
 svg.selectAll('text')
     .data(keys)
