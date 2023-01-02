@@ -54,6 +54,10 @@ p {
   fill: var(--very-pale-orange);
 }
 
+.dayText {
+  fill: var(--medium-brown);
+}
+
 .grid {
   width: 350px;
   display: grid;

@@ -42,11 +42,11 @@ svg.selectAll('rect')
     .attr('rx', '5px');
 
 svg.selectAll('text')
-    .data(values)
+    .data(keys)
     .enter()
     .append('text')
-    .text('test')
-    .attr('x', (d, i) => i * 60)
-    .attr('y', svgHeight)
-    .attr('fill-color', 'white')
-    .attr('font-size', '24px');
+    .text((d) => d)
+    .attr('x', (d, i) => i * 60 + 10)
+    .attr('y', svgHeight - 10)
+    .attr('font-size', '15px')
+    .attr('class', 'dayText');
