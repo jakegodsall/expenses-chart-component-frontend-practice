@@ -20,11 +20,27 @@ const yScale = (val) => {
     return (val / maxValue) * (svgHeight - 60);
 };
 
+const toggleColor = () => {};
+
 const svg = d3
     .select('.visualisation')
     .append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
+
+svg.selectAll('text.vals')
+    .data(values)
+    .enter()
+
+    .append('text')
+    .attr('class', 'tooltip')
+    .attr('x', (d, i) => {
+        return i * 60 + 3;
+    })
+    .attr('y', (d) => {
+        return svgHeight - yScale(d) - 40;
+    })
+    .text((d) => d);
 
 svg.selectAll('rect')
     .data(values)
@@ -42,11 +58,12 @@ svg.selectAll('rect')
         return svgHeight - yScale(d) - 30;
     })
     .attr('rx', '5px')
-    .on('click', () => {
-        d3.select(this).attr('class', 'active');
-    });
+    .on('mouseover', (e) => {
+        e.attr('class', 'active');
+    })
+    .on('mouseout', (e) => {});
 
-svg.selectAll('text')
+svg.selectAll('text.days')
     .data(keys)
     .enter()
     .append('text')
