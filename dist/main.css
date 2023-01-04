@@ -128,12 +128,13 @@ p {
 }
 .grid__main .insights__balance .balance-amount {
   color: var(--dark-brown);
-  font-size: 2rem;
+  font-size: 3rem;
+  margin-top: 0.5rem;
 }
 .grid__main .insights__change {
   display: flex;
   flex-direction: column;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 .grid__main .insights__change .percent-change {
   text-align: right;
