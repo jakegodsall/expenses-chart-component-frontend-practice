@@ -9,7 +9,7 @@ d3.json(DATA_PATH).then((data) => {
     const svgHeight = 280;
     const svgWidth = 410;
 
-    const yScale = d3.scaleLinear().domain([0, maxAmount]).range([svgHeight, 50]);
+    const yScale = d3.scaleLinear().domain([0, maxAmount]).range([svgHeight, 100]);
 
     // append svg element to div
     const svg = d3
@@ -36,16 +36,22 @@ d3.json(DATA_PATH).then((data) => {
         .attr('height', (d) => svgHeight - yScale(0))
         .attr('rx', '5px');
 
-    //  transition bars
+    //  transition bars on load
     svg.selectAll('rect')
         .transition()
-        .duration(800)
+        .duration(1000)
         .attr('y', (d) => {
             return yScale(d) - 30;
         })
         .attr('height', (d) => {
             return svgHeight - yScale(d);
         });
+
+    // click event for changing color of bar
+    svg.selectAll('rect').on('click', (e) => {
+        d3.selectAll('rect').attr('class', 'bar');
+        d3.select(e.target).attr('class', 'bar active');
+    });
 
     // create day labels
     svg.selectAll('text.days')

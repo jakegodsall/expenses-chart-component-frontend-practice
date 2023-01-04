@@ -72,10 +72,19 @@
     margin: 0.2rem;
     border-radius: 10px;
     fill: var(--soft-red);
+    cursor: pointer;
 }
 
 .bar:hover {
     fill: var(--very-pale-orange);
+}
+
+.bar.active {
+    fill: var(--cyan);
+}
+
+.bar.active:hover {
+    fill: var(--very-pale-cyan);
 }
 
 .dayText {
