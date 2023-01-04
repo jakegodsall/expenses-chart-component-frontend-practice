@@ -1,82 +1,59 @@
-const expenditure = {
-    mon: 32.25,
-    tue: 32.32,
-    wed: 52.36,
-    thu: 31.07,
-    fri: 90.04,
-    sat: 40.04,
-    sun: 44.97,
-};
+const DATA_PATH = '../data.json';
 
-const keys = Object.keys(expenditure);
-const values = Object.values(expenditure);
+d3.json(DATA_PATH).then((data) => {
+    const days = data.map((el) => el.day);
+    const amount = data.map((el) => el.amount);
 
-const maxValue = Math.max(...values);
+    const maxAmount = Math.max(...amount);
 
-const svgHeight = 280;
-const svgWidth = 410;
+    const svgHeight = 280;
+    const svgWidth = 410;
 
-const yScale = (val) => {
-    return (val / maxValue) * (svgHeight - 60);
-};
+    const yScale = d3.scaleLinear().domain([0, maxAmount]).range([svgHeight, 50]);
 
-const toggleColor = () => {};
+    // append svg element to div
+    const svg = d3
+        .select('.visualisation')
+        .append('svg')
+        .attr('width', svgWidth)
+        .attr('height', svgHeight);
 
-const svg = d3
-    .select('.visualisation')
-    .append('svg')
-    .attr('width', svgWidth)
-    .attr('height', svgHeight);
+    //  create bars
+    svg.selectAll('rect')
+        .data(amount)
+        .join('rect')
+        .attr('class', 'bar')
+        .attr('width', 50)
+        .attr('height', (d) => {
+            return 0;
+        })
+        .attr('x', (d, i) => {
+            return i * 60;
+        })
+        .attr('y', (d, i) => {
+            return svgHeight - 30;
+        })
+        .attr('height', (d) => svgHeight - yScale(0))
+        .attr('rx', '5px');
 
-svg.selectAll('text.vals')
-    .data(values)
-    .enter()
+    //  transition bars
+    svg.selectAll('rect')
+        .transition()
+        .duration(800)
+        .attr('y', (d) => {
+            return yScale(d) - 30;
+        })
+        .attr('height', (d) => {
+            return svgHeight - yScale(d);
+        });
 
-    .append('text')
-    .attr('class', 'tooltip')
-    .attr('x', (d, i) => {
-        return i * 60 + 3;
-    })
-    .attr('y', (d) => {
-        return svgHeight - yScale(d) - 40;
-    })
-    .text((d) => d);
-
-svg.selectAll('rect')
-    .data(values)
-    .enter()
-    .append('rect')
-    .attr('class', 'bar')
-    .attr('width', 50)
-    .attr('height', (d) => {
-        return 0;
-    })
-    .attr('x', (d, i) => {
-        return i * 60;
-    })
-    .attr('y', (d, i) => {
-        return svgHeight - 30;
-    })
-    .attr('rx', '5px')
-    .on('mouseover', (e) => {
-        e.attr('class', 'active');
-    })
-    .on('mouseout', (e) => {})
-    .transition()
-    .duration(800)
-    .attr('y', (d) => {
-        return svgHeight - yScale(d) - 30;
-    })
-    .attr('height', (d) => {
-        return yScale(d);
-    });
-
-svg.selectAll('text.days')
-    .data(keys)
-    .enter()
-    .append('text')
-    .text((d) => d)
-    .attr('x', (d, i) => i * 60 + 10)
-    .attr('y', svgHeight - 10)
-    .attr('font-size', '15px')
-    .attr('class', 'dayText');
+    // create day labels
+    svg.selectAll('text.days')
+        .data(days)
+        .join('text')
+        .text((d) => d)
+        .attr('x', (d, i) => i * 60 + 10)
+        .attr('y', svgHeight - 10)
+        .attr('font-size', '15px')
+        .attr('class', 'dayText');
+});
