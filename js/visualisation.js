@@ -50,7 +50,7 @@ d3.json(DATA_PATH).then((data) => {
         });
 
     // click event for changing color of bar
-    svg.selectAll('rect').on('click', () => {
+    svg.selectAll('rect').on('click', function () {
         d3.selectAll('rect').attr('class', 'bar');
         d3.select(this).attr('class', 'bar active');
     });
