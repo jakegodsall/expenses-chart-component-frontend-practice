@@ -1,15 +1,17 @@
 const DATA_PATH = '../data.json';
 
+const svgHeight = 280;
+const svgWidth = 410;
+
+const xScale = d3.scaleBand().range([0, svgWidth]).padding(0.1);
+const yScale = d3.scaleLinear().range([svgHeight, 100]);
+
 d3.json(DATA_PATH).then((data) => {
-    const days = data.map((el) => el.day);
-    const amount = data.map((el) => el.amount);
+    data.forEach((d) => (d.amount = +d.amount));
+    const maxAmount = d3.max(data.map((d) => d.amount));
 
-    const maxAmount = Math.max(...amount);
-
-    const svgHeight = 280;
-    const svgWidth = 410;
-
-    const yScale = d3.scaleLinear().domain([0, maxAmount]).range([svgHeight, 100]);
+    xScale.domain(data.map((d) => d.day));
+    yScale.domain([0, maxAmount]);
 
     // append svg element to div
     const svg = d3
@@ -20,18 +22,18 @@ d3.json(DATA_PATH).then((data) => {
 
     //  create bars
     svg.selectAll('rect')
-        .data(amount)
+        .data(data)
         .join('rect')
         .attr('class', 'bar')
-        .attr('width', 50)
-        .attr('height', (d) => {
-            return 0;
-        })
         .attr('x', (d, i) => {
-            return i * 60;
+            return xScale(d.day);
         })
         .attr('y', (d, i) => {
             return svgHeight - 30;
+        })
+        .attr('width', xScale.bandwidth())
+        .attr('height', (d) => {
+            return 0;
         })
         .attr('height', (d) => svgHeight - yScale(0))
         .attr('rx', '5px');
@@ -41,10 +43,10 @@ d3.json(DATA_PATH).then((data) => {
         .transition()
         .duration(1000)
         .attr('y', (d) => {
-            return yScale(d) - 30;
+            return yScale(d.amount) - 30;
         })
         .attr('height', (d) => {
-            return svgHeight - yScale(d);
+            return svgHeight - yScale(d.amount);
         });
 
     // click event for changing color of bar
@@ -54,11 +56,15 @@ d3.json(DATA_PATH).then((data) => {
     });
 
     // create day labels
-    svg.selectAll('text.days')
-        .data(days)
+    svg.selectAll('text.day')
+        .append('g')
+        .data(data)
         .join('text')
-        .text((d) => d)
-        .attr('x', (d, i) => i * 60 + 10)
+        .text((d) => d.day)
+        .attr('x', function (d) {
+            const width = d3.select(this).node().getBBox().width / 2;
+            return xScale(d.day) + xScale.bandwidth() / 2 - width;
+        })
         .attr('y', svgHeight - 10)
         .attr('font-size', '15px')
         .attr('class', 'dayText');
