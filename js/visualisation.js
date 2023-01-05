@@ -21,7 +21,7 @@ d3.json(DATA_PATH).then((data) => {
         .attr('height', svgHeight);
 
     //  create bars
-    svg.selectAll('rect')
+    svg.selectAll('rect.bar')
         .data(data)
         .join('rect')
         .attr('class', 'bar')
@@ -39,7 +39,7 @@ d3.json(DATA_PATH).then((data) => {
         .attr('rx', '5px');
 
     //  transition bars on load
-    svg.selectAll('rect')
+    svg.selectAll('rect.bar')
         .transition()
         .duration(1000)
         .attr('y', (d) => {
@@ -50,14 +50,14 @@ d3.json(DATA_PATH).then((data) => {
         });
 
     // click event for changing color of bar
-    svg.selectAll('rect').on('click', function () {
-        d3.selectAll('rect').attr('class', 'bar');
+    svg.selectAll('rect.bar').on('click', function () {
+        d3.selectAll('rect.bar').attr('class', 'bar');
         d3.select(this).attr('class', 'bar active');
     });
 
     // create day labels
     svg.selectAll('text.day')
-        .append('g')
+
         .data(data)
         .join('text')
         .text((d) => d.day)
@@ -68,4 +68,29 @@ d3.json(DATA_PATH).then((data) => {
         .attr('y', svgHeight - 10)
         .attr('font-size', '15px')
         .attr('class', 'dayText');
+
+    // create tooltips
+    const tooltip = svg.selectAll('g').data(data).join('g').attr('class', 'tooltip');
+
+    // append tooltip background
+    tooltip
+        .append('rect')
+        .join('rect')
+        .attr('class', 'tooltip-background')
+        .attr('x', (d) => xScale(d.day) - 6)
+        .attr('y', (d) => yScale(d.amount) - 80)
+        .attr('width', (d) => xScale.bandwidth() + 15)
+        .attr('height', 40)
+        .attr('rx', '5px');
+
+    // append tooltip text
+    tooltip
+        .append('text')
+        .join('text')
+        .attr('class', 'tooltip-text')
+        .text((d) => `£${d.amount}`)
+        .attr('x', (d) => xScale(d.day) + 3)
+        .attr('y', (d) => yScale(d.amount) - 55);
+
+    // transition tooltip opacity on click of bar
 });

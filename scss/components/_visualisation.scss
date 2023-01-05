@@ -92,4 +92,14 @@
 }
 
 .tooltip {
+    opacity: 0;
+    cursor: default;
+}
+
+.tooltip-background {
+    fill: var(--dark-brown);
+}
+
+.tooltip-text {
+    fill: white;
 }

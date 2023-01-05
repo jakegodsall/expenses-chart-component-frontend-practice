@@ -67,6 +67,19 @@ p {
   fill: var(--medium-brown);
 }
 
+.tooltip {
+  opacity: 0;
+  cursor: default;
+}
+
+.tooltip-background {
+  fill: var(--dark-brown);
+}
+
+.tooltip-text {
+  fill: white;
+}
+
 .grid {
   width: 350px;
   display: grid;
