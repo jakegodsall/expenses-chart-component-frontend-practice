@@ -50,9 +50,9 @@ d3.json(DATA_PATH).then((data) => {
         });
 
     // click event for changing color of bar
-    svg.selectAll('rect').on('click', (e) => {
+    svg.selectAll('rect').on('click', () => {
         d3.selectAll('rect').attr('class', 'bar');
-        d3.select(e.target).attr('class', 'bar active');
+        d3.select(this).attr('class', 'bar active');
     });
 
     // create day labels
