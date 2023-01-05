@@ -3,7 +3,7 @@ const DATA_PATH = '../data.json';
 const svgHeight = 280;
 const svgWidth = 410;
 
-const xScale = d3.scaleBand().range([0, svgWidth]).padding(0.1);
+const xScale = d3.scaleBand().range([0, svgWidth]).padding(0.2);
 const yScale = d3.scaleLinear().range([svgHeight, 100]);
 
 d3.json(DATA_PATH).then((data) => {
@@ -54,7 +54,37 @@ d3.json(DATA_PATH).then((data) => {
     day.selectAll('rect.bar').on('click', function () {
         d3.selectAll('rect.bar').attr('class', 'bar');
         d3.select(this).attr('class', 'bar active');
+        const thisTooltip = d3.select(d3.select(this).node().nextElementSibling);
+        d3.selectAll('g.tooltip').attr('class', 'tooltip');
+        thisTooltip.attr('class', 'tooltip active');
     });
+
+    // create tooltips
+    const tooltip = day.append('g').join('g').attr('class', 'tooltip');
+
+    // append tooltip background
+    tooltip
+        .append('rect')
+        .join('rect')
+        .attr('class', 'tooltip-background')
+        .attr('x', (d) => xScale(d.day) - 7)
+        .attr('y', (d) => yScale(d.amount) - 65)
+        .attr('width', function () {
+            return xScale.bandwidth() + 15;
+        })
+        .attr('height', 30)
+        .attr('rx', '5px');
+
+    // append tooltip text
+    tooltip
+        .append('text')
+        .join('text')
+        .attr('class', 'tooltip-text')
+        .text((d) => `£${d.amount}`)
+        .attr('x', function (d) {
+            return xScale(d.day) - 3;
+        })
+        .attr('y', (d) => yScale(d.amount) - 45);
 
     // create day labels
     day.append('text')
@@ -67,29 +97,6 @@ d3.json(DATA_PATH).then((data) => {
         .attr('y', svgHeight - 10)
         .attr('font-size', '15px')
         .attr('class', 'dayText');
-
-    // create tooltips
-    const tooltip = day.append('g').join('g').attr('class', 'tooltip');
-
-    // append tooltip background
-    tooltip
-        .append('rect')
-        .join('rect')
-        .attr('class', 'tooltip-background')
-        .attr('x', (d) => xScale(d.day) - 6)
-        .attr('y', (d) => yScale(d.amount) - 80)
-        .attr('width', (d) => xScale.bandwidth() + 15)
-        .attr('height', 40)
-        .attr('rx', '5px');
-
-    // append tooltip text
-    tooltip
-        .append('text')
-        .join('text')
-        .attr('class', 'tooltip-text')
-        .text((d) => `£${d.amount}`)
-        .attr('x', (d) => xScale(d.day) + 3)
-        .attr('y', (d) => yScale(d.amount) - 55);
 
     // transition tooltip opacity on click of bar
 });

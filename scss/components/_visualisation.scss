@@ -92,8 +92,12 @@
 }
 
 .tooltip {
-    // opacity: 0;
+    opacity: 0;
     cursor: default;
+}
+
+.tooltip.active {
+    opacity: 1;
 }
 
 .tooltip-background {
