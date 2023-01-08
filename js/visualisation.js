@@ -49,7 +49,7 @@ d3.json(DATA_PATH).then((data) => {
             return svgHeight - yScale(d.amount);
         });
 
-    // click event for changing color of bar
+    // click event for changing color of bar and making tooltip visible
     day.selectAll('rect.bar').on('click', function () {
         d3.selectAll('rect.bar').attr('class', 'bar');
         d3.select(this).attr('class', 'bar active');

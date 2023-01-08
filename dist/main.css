@@ -49,6 +49,7 @@ p {
   border-radius: 10px;
   fill: var(--soft-red);
   cursor: pointer;
+  transition: fill 0.3s;
 }
 
 .bar:hover {
@@ -70,6 +71,7 @@ p {
 .tooltip {
   opacity: 0;
   cursor: default;
+  transition: 1s;
 }
 
 .tooltip.active {
