@@ -7,15 +7,16 @@ realistic projects.
 
 ## Table of contents
 
--   [Overview](#overview)
-    -   [The challenge](#the-challenge)
-    -   [Screenshot](#screenshot)
-    -   [Links](#links)
--   [My process](#my-process)
-    -   [Built with](#built-with)
-    -   [What I learned](#what-i-learned)
-    -   [Continued development](#continued-development)
--   [Author](#author)
+- [Frontend Mentor - Expenses chart component solution](#frontend-mentor---expenses-chart-component-solution)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Screenshot](#screenshot)
+    - [Links](#links)
+  - [My process](#my-process)
+    - [Built with](#built-with)
+    - [What I learned](#what-i-learned)
+  - [Author](#author)
 
 ## Overview
 
@@ -23,19 +24,20 @@ realistic projects.
 
 Users should be able to:
 
--   View the bar chart and hover over the individual bars to see the correct
-    amounts for each day
--   See the current day’s bar highlighted in a different colour to the other
-    bars
--   View the optimal layout for the content depending on their device’s screen
-    size
--   See hover states for all interactive elements on the page
--   **Bonus**: Use the JSON data file provided to dynamically size the bars on
+&#9745;   View the bar chart and hover over the individual bars to see the correct amounts for each day
+
+&#9745;   See the current day’s bar highlighted in a different colour to the other bars
+
+&#9745;  View the optimal layout for the content depending on their device’s screen size
+
+&#9745; See hover states for all interactive elements on the page
+
+&#9745; **Bonus**: Use the JSON data file provided to dynamically size the bars on
     the chart
 
 ### Screenshot
 
-<img src="screenshots/mobile.png">
+![Usage gif](./gif/usage-gif.gif)
 
 ### Links
 
@@ -53,41 +55,23 @@ Users should be able to:
 -   7-1 CSS Architecture
 -   Mobile-first workflow
 -   Vanilla JavaScript
-
-**Note: These are just examples. Delete this note and replace the list above
-with your own choices**
+-   [D3.js](https://d3js.org/)
 
 ### What I learned
 
-This is the first project that I have worked on from the second difficulty level
-at [Frontend Mentor](https://www.frontendmentor.io/).
+This is my second solution to the [Expenses chart component challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/expenses-chart-component-e7yJBUdjwt).
 
-The dynamic aspects of the component were far more challenging than anything I
-have previously come across, but I very much enjoyed the project.
+I decided to do it again as I have been learning D3 and it seemed a great opportunity to practice what I had learned.
 
-There are a number of things that I have added to the project to make it a
-little more interesting:
+I have learned a ton about D3, and SVGs in general. Some things I have learned are:
 
--   Dynamically changing bars in the visualisation according to the values
-    stored in the weekly expenditure object.
--   Showing the actual total in the DOM from the weekly expenditure object.
-
-Some things that I have learned from this project are:
-
--   How to use `position:relative` on a parent element and `position:absolute`
-    on the child element for ease of absolute positioning.
--   How to create a complete new element in JavaScript and render it into the
-    DOM during an event.
-
-### Continued development
-
-One thing that I would like to do to continue working on this project in the
-future is to solve the problem that will occur when the value for the weekly
-total gets too large. Thiss will cause the component to expand and look ugly.
+- How to make responsive SVGs.
+- How to structure an SVG using the `g` element.
+- How to add animations to visualisations with the `.transition()` method.
+- How to import data with D3.
 
 ## Author
 
 -   Website - [jakegodsall](https://jakegodsall.com)
--   Frontend Mentor -
-    [@jakegodsall](https://www.frontendmentor.io/profile/yourusername)
+-   Frontend Mentor - [@jakegodsall](https://www.frontendmentor.io/profile/yourusername)
 -   LinkedIn - [@godsalljake](https://www.linkedin.com/in/godsalljake/)
