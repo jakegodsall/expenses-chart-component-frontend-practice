@@ -51,11 +51,39 @@ d3.json(DATA_PATH).then((data) => {
 
     // click event for changing color of bar and making tooltip visible
     day.selectAll('rect.bar').on('click', function () {
+        // reset all bars to not active state
         d3.selectAll('rect.bar').attr('class', 'bar');
+        // set *this* bar to active state
         d3.select(this).attr('class', 'bar active');
+
+        // get the tooltip for this bar
         const thisTooltip = d3.select(d3.select(this).node().nextElementSibling);
+
+        // reset all tooltips to not active state
         d3.selectAll('g.tooltip').attr('class', 'tooltip');
+        // set *this* tooltip to active state
         thisTooltip.attr('class', 'tooltip active');
+    });
+
+    // mouseover event for making the tooltip visible
+    day.selectAll('rect.bar').on('mouseover', function () {
+        const thisTooltip = d3.select(d3.select(this).node().nextElementSibling);
+
+        thisTooltip.attr('class', 'tooltip active');
+    });
+
+    // mouseout event for making the tooltip not visible
+    day.selectAll('rect.bar').on('mouseout', function () {
+        const thisBar = d3.select(this).node();
+
+        console.log(thisBar.classList);
+
+        console.log(thisBar);
+        const thisTooltip = d3.select(d3.select(this).node().nextElementSibling);
+
+        if (!thisBar.classList.contains('active')) {
+            thisTooltip.attr('class', 'tooltip');
+        }
     });
 
     // create tooltips
