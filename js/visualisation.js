@@ -17,8 +17,7 @@ d3.json(DATA_PATH).then((data) => {
     const svg = d3
         .select('.visualisation')
         .append('svg')
-        .attr('width', svgWidth)
-        .attr('height', svgHeight);
+        .attr('viewBox', `0 0 ${svgWidth} ${svgHeight}`);
 
     const day = svg.selectAll('g.item').data(data).join('g').attr('class', 'vis-item');
 
