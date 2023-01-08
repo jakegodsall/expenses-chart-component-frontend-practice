@@ -166,6 +166,11 @@ p {
   }
 }
 
+@media screen and (max-width: 500px) {
+  #balance-amount {
+    font-size: 2rem;
+  }
+}
 .attribution {
   margin-top: 50px;
   width: 350px;
